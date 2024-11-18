@@ -1,3 +1,5 @@
+import MainWrap from "./components/ui/MainWrap";
+
 export default function App() {
-  return <div>Main setup</div>;
+  return <MainWrap>MainWrap</MainWrap>;
 }
