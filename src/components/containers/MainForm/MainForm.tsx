@@ -1,33 +1,21 @@
 import * as z from "zod";
 import { useState } from "react";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
 import { Form, FormControl, FormField, FormItem, FormMessage } from "@/components/ui/form";
 import { Input } from "../../ui/input";
 import { Button } from "../../ui/button";
 import { Checkbox } from "../../ui/checkbox";
 import { Label } from "../../ui/label";
-import { mainFormSchema } from "./mainFormSchema";
 import { Dialog, DialogContent, DialogHeader, DialogDescription } from "@/components/ui/dialog";
 import SyntaxHighlighter from "react-syntax-highlighter";
 import { vscDarkPlus } from "react-syntax-highlighter/dist/cjs/styles/prism";
+import useMainForm from "./useMainForm";
+import { mainFormSchema } from "./mainFormSchema";
 
 export default function MainForm() {
   const [isOpen, setIsOpen] = useState(false);
   const [codeSnippet, setCodeSnippet] = useState("");
 
-  const form = useForm<z.infer<typeof mainFormSchema>>({
-    resolver: zodResolver(mainFormSchema),
-    defaultValues: {
-      username: "",
-      email: "",
-      password: "",
-      confirmPassword: "",
-      termsAndConditions: false,
-      signToNewsletter: true,
-    },
-    mode: "onBlur",
-  });
+  const form = useMainForm();
 
   const handleSubmit = (values: z.infer<typeof mainFormSchema>) => {
     setCodeSnippet(JSON.stringify(values, null, 2));
@@ -123,7 +111,7 @@ export default function MainForm() {
             <h2 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight first:mt-0">Success!</h2>
           </DialogHeader>
           <DialogDescription>
-            <p className="leading-7 [&:not(:first-child)]:mt-6">You have successfully sumbitted the form!</p>
+            <p className="leading-7 [&:not(:first-child)]:mt-6">You have successfully fake-sumbitted the form!</p>
             <p className="leading-7 [&:not(:first-child)]:mt-6">Your form data:</p>
             <SyntaxHighlighter className="[&:not(:first-child)]:mt-6" language="javascript" style={vscDarkPlus}>
               {codeSnippet}
