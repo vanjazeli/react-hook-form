@@ -9,9 +9,12 @@ import { Checkbox } from "../../ui/checkbox";
 import { Label } from "../../ui/label";
 import { mainFormSchema } from "./mainFormSchema";
 import { Dialog, DialogContent, DialogHeader, DialogDescription } from "@/components/ui/dialog";
+import SyntaxHighlighter from "react-syntax-highlighter";
+import { vscDarkPlus } from "react-syntax-highlighter/dist/cjs/styles/prism";
 
 export default function MainForm() {
   const [isOpen, setIsOpen] = useState(false);
+  const [codeSnippet, setCodeSnippet] = useState("");
 
   const form = useForm<z.infer<typeof mainFormSchema>>({
     resolver: zodResolver(mainFormSchema),
@@ -27,6 +30,7 @@ export default function MainForm() {
   });
 
   const handleSubmit = (values: z.infer<typeof mainFormSchema>) => {
+    setCodeSnippet(JSON.stringify(values, null, 2));
     setIsOpen(true);
   };
 
@@ -89,7 +93,7 @@ export default function MainForm() {
               <FormControl>
                 <div className="flex items-center gap-2">
                   <Checkbox id="terms-and-conditions" checked={field.value} onCheckedChange={field.onChange} onBlur={field.onBlur} />
-                  <Label htmlFor="terms-and-conditions">I accept and agree to the Terms of Service and Privacy Policy.</Label>
+                  <Label htmlFor="terms-and-conditions">I accept and agree to the terms of service and privacy policy.</Label>
                 </div>
               </FormControl>
               <FormMessage />
@@ -121,6 +125,9 @@ export default function MainForm() {
           <DialogDescription>
             <p className="leading-7 [&:not(:first-child)]:mt-6">You have successfully sumbitted the form!</p>
             <p className="leading-7 [&:not(:first-child)]:mt-6">Your form data:</p>
+            <SyntaxHighlighter className="[&:not(:first-child)]:mt-6" language="javascript" style={vscDarkPlus}>
+              {codeSnippet}
+            </SyntaxHighlighter>
           </DialogDescription>
         </DialogContent>
       </Dialog>

@@ -1,10 +1,10 @@
-import MainWrap from './components/ui/MainWrap';
-import MainForm from './components/containers/MainForm/MainForm';
+import MainWrap from "./components/ui/MainWrap";
+import MainForm from "./components/containers/MainForm/MainForm";
 
 export default function App() {
-	return (
-		<MainWrap>
-			<MainForm />
-		</MainWrap>
-	);
+  return (
+    <MainWrap className="min-h-screen flex items-center">
+      <MainForm />
+    </MainWrap>
+  );
 }
