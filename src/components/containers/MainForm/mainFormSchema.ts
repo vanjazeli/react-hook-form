@@ -7,6 +7,7 @@ export const mainFormSchema = z
 		password: z.string().min(8),
 		confirmPassword: z.string(),
 		termsAndConditions: z.boolean(),
+		signToNewsletter: z.boolean(),
 	})
 	.refine((data) => data.password === data.confirmPassword, {
 		message: 'Passwords do not match',

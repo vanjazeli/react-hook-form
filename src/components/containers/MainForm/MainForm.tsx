@@ -21,6 +21,7 @@ export default function MainForm() {
 			password: '',
 			confirmPassword: '',
 			termsAndConditions: false,
+			signToNewsletter: true,
 		},
 		mode: 'onBlur',
 	});
@@ -38,7 +39,7 @@ export default function MainForm() {
 					render={({ field }) => (
 						<FormItem>
 							<FormControl>
-								<Input placeholder="Username" {...field} />
+								<Input className={form.formState.errors.username ? 'ring-1 ring-destructive focus-visible:ring-destructive' : ''} placeholder="Username" {...field} />
 							</FormControl>
 							<FormMessage />
 						</FormItem>
@@ -50,7 +51,7 @@ export default function MainForm() {
 					render={({ field }) => (
 						<FormItem>
 							<FormControl>
-								<Input placeholder="Email" type="email" {...field} />
+								<Input className={form.formState.errors.email ? 'ring-1 ring-destructive focus-visible:ring-destructive' : ''} placeholder="Email" type="email" {...field} />
 							</FormControl>
 							<FormMessage />
 						</FormItem>
@@ -62,7 +63,7 @@ export default function MainForm() {
 					render={({ field }) => (
 						<FormItem>
 							<FormControl>
-								<Input placeholder="Password" type="password" {...field} />
+								<Input className={form.formState.errors.password ? 'ring-1 ring-destructive focus-visible:ring-destructive' : ''} placeholder="Password" type="password" {...field} />
 							</FormControl>
 							<FormMessage />
 						</FormItem>
@@ -74,7 +75,7 @@ export default function MainForm() {
 					render={({ field }) => (
 						<FormItem>
 							<FormControl>
-								<Input placeholder="Confirm password" type="password" {...field} />
+								<Input className={form.formState.errors.confirmPassword ? 'ring-1 ring-destructive focus-visible:ring-destructive' : ''} placeholder="Confirm password" type="password" {...field} />
 							</FormControl>
 							<FormMessage />
 						</FormItem>
@@ -88,7 +89,22 @@ export default function MainForm() {
 							<FormControl>
 								<div className="flex items-center gap-2">
 									<Checkbox id="terms-and-conditions" checked={field.value} onCheckedChange={field.onChange} onBlur={field.onBlur} />
-									<Label htmlFor="terms-and-conditions">I accept and agree to terms and conditions.</Label>
+									<Label htmlFor="terms-and-conditions">I accept and agree to the Terms of Service and Privacy Policy.</Label>
+								</div>
+							</FormControl>
+							<FormMessage />
+						</FormItem>
+					)}
+				/>
+				<FormField
+					control={form.control}
+					name="signToNewsletter"
+					render={({ field }) => (
+						<FormItem>
+							<FormControl>
+								<div className="flex items-center gap-2">
+									<Checkbox id="sign-to-newsletter" checked={field.value} onCheckedChange={field.onChange} onBlur={field.onBlur} />
+									<Label htmlFor="sign-to-newsletter">Sign me up to receive updates, exclusive offers, and promotions via email.</Label>
 								</div>
 							</FormControl>
 							<FormMessage />
