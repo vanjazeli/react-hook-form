@@ -1,5 +1,10 @@
 import MainWrap from "./components/ui/MainWrap";
+import MainForm from "./components/containers/MainForm";
 
 export default function App() {
-  return <MainWrap>MainWrap</MainWrap>;
+  return (
+    <MainWrap>
+      <MainForm />
+    </MainWrap>
+  );
 }
